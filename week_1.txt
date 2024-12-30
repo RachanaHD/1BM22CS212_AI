@@ -1,0 +1,82 @@
+board=([['1','1','1'],['1','1','1'],['1','1','1']])
+
+def check(board,user):
+  for i in range(3):
+    if(board[0][i]==user and board[1][i]==user and board[2][i]==user):
+      return True
+    if(board[i][0]==user and board[i][1]==user and board[i][2]==user):
+      return True
+    if(board[0][0]==user and board[1][1]==user and board[2][2]==user):
+      return True
+    if(board[0][2]==user and board[1][1]==user and board[2][0]==user):
+      return True
+  return False
+
+def show(board):
+  for b in board:
+    print(b)
+
+def full(board):
+  for i in range(3):
+    for j in range(3):
+      if(board[i][j] == '1'):
+        return False
+  return True
+
+user=0
+
+user1=input("Enter user name:")
+user2=input("Enter user name:")
+
+while True :
+
+  if (full(board)) :
+    print("Draw")
+    break
+
+  if(user==0):
+
+    show(board)
+    print(user1 + " play")
+    row=int(input("Enter row:"))
+    col=int(input("Enter col:"))
+
+    if(board[row][col]=='1'):
+      board[row][col]='X'
+    else:
+      print("Wrong!")
+      continue
+
+    if(check(board,'X')):
+      print(user1 + " won!")
+      break
+    else:
+      user=1
+
+  if(full(board)):
+      print("Draw")
+      break
+
+  if(user==1):
+
+    show(board)
+
+    print(user2 + " play")
+    row=int(input("Enter row:"))
+    col=int(input("Enter col:"))
+
+    if(board[row][col]=='1'):
+      board[row][col]='O'
+    else:
+      print("Wrong!")
+      continue
+
+    if(check(board,'O')):
+      print(user2 + " won!")
+      break
+    else:
+      user=0
+
+  if full(board):
+        print("Draw")
+        break

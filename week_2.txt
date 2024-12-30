@@ -1,0 +1,52 @@
+
+def vacuum(state1, state2, loc):
+    global cost
+    if state1 == "0" and state2 == "0":
+        print("All done")
+        return
+
+    if loc == "A":
+        if state1 == "1" and state2=="1":
+            print("Cleaned A")
+            cost= cost+1
+            state1 = "0"
+            state1 = input("Is A dirty again?:  ")
+            vacuum(state1,state2,"A")
+        elif state1=="1" and state2=="0":
+            print("Cleaned A")
+            cost= cost+1
+            state1 = "0"
+            state1 = input("Is A dirty again?:  ")
+            state2 = input("Is B dirty again?:  ")
+            vacuum(state1,state2,"A")   
+        elif state1=="0" and state2=="1":
+            print("Moving to B")
+            loc="B"
+            vacuum(state1,state2,loc)              
+
+    elif loc == "B":
+        if state1 == "1" and state2=="1":
+            print("Cleaned B")
+            cost= cost+1
+            state2 = "0"
+            state2 = input("Is A dirty again?:  ")
+            vacuum(state1,state2,"B")
+        elif state1=="0" and state2=="1":
+            print("Cleaned B")
+            cost= cost+1
+            state1 = "0"
+            state1 = input("Is A dirty again?:  ")
+            state2 = input("Is B dirty again?:  ")
+            vacuum(state1,state2,"A")   
+        elif state1=="1" and state2=="0":
+            print("Moving to B")
+            loc="B"
+            vacuum(state1,state2,loc)              
+
+
+print("Enter both states and location of vacuum")
+state1 = input("Enter state 1 (0 or 1): ")
+state2 = input("Enter state 2 (0 or 1): ")
+loc = input("Enter loc (A or B): ")
+vacuum(state1, state2, loc)
+print("Total cost " + str(cost))
